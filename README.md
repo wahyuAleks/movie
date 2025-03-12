@@ -23,7 +23,7 @@ Jika Anda baru saja meng-clone repository proyek Laravel dan ingin menjalankan p
 4. **Set Database Connection:**
    Pastikan bahwa pengaturan koneksi database di file `.env` sesuai dengan konfigurasi database Anda.
 
-   Contoh: Jika Anda membuat database dbmovie, maka di file `.env` ubahlah DB_DATABASE=laravel menjadi DB_DATABASE=dbmovie 
+   Contoh: Jika Anda membuat database dbmovie, maka di file `.env` ubahlah `DB_DATABASE=laravel` menjadi `DB_DATABASE=dbmovie`
 
 6. **Run Migrations:**
    Sekarang Anda dapat menjalankan perintah migrasi untuk membuat tabel-tabel database:
@@ -47,3 +47,4 @@ Jika Anda baru saja meng-clone repository proyek Laravel dan ingin menjalankan p
     Aplikasi akan berjalan di http://localhost:8000 secara default.
 
 ====================================================================
+_Credit by: Yori Adi Atma_
