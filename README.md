@@ -1,6 +1,6 @@
 ## About Laravel Movie DB
 
-Ini adalah sistem database movie menggunakan laravel untuk mata kuliah Pemograman Web Lanjut Prodi Teknik Komputer Jurusan Teknologi Informasi Politeknik Negeri Padang.
+Ini adalah sistem database movie menggunakan laravel untuk mata kuliah Konstruksi dan Evolusi Perangkat Lunak Prodi Teknologi Rekayasa Perangkat Lunak Jurusan Teknologi Informasi Politeknik Negeri Padang.
 
 Silahkan clone repository ini ke PC Anda.
 Jika Anda baru saja meng-clone repository proyek Laravel dan ingin menjalankan perintah migrasi, ada beberapa langkah yang perlu Anda lakukan terlebih dahulu. Berikut adalah langkah-langkahnya:
