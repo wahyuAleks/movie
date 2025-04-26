@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreMovieRequest;
 
 class MovieController extends Controller
 {
@@ -37,42 +38,18 @@ class MovieController extends Controller
         return view('input', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(StoreMovieRequest $request)
     {
-        // Validasi data
-        $validator = Validator::make($request->all(), [
-            'id' => ['required', 'string', 'max:255', Rule::unique('movies', 'id')],
-            'judul' => 'required|string|max:255',
-            'category_id' => 'required|integer',
-            'sinopsis' => 'required|string',
-            'tahun' => 'required|integer',
-            'pemain' => 'required|string',
-            'foto_sampul' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        // Jika validasi gagal, kembali ke halaman input dengan pesan kesalahan
-        if ($validator->fails()) {
-            return redirect('movies/create')
-                ->withErrors($validator)
-                ->withInput();
-        }
+          // Ambil data yang sudah tervalidasi
+    $validated = $request->validated();
 
-        $randomName = Str::uuid()->toString();
-        // $fileExtension = $request->file('foto_sampul')->getClientOriginalExtension();
-        $fileExtension = 'jpg';
-        $fileName = $randomName . '.' . $fileExtension;
+    // Simpan file foto jika ada
+    if ($request->hasFile('foto_sampul')) {
+        $validated['foto_sampul'] = $request->file('foto_sampul')->store('movie_covers', 'public');
+    }
 
-        // Simpan file foto ke folder public/images
-        $request->file('foto_sampul')->move(public_path('images'), $fileName);
-        // Simpan data ke table movies
-        Movie::create([
-            'id' => $request->id,
-            'judul' => $request->judul,
-            'category_id' => $request->category_id,
-            'sinopsis' => $request->sinopsis,
-            'tahun' => $request->tahun,
-            'pemain' => $request->pemain,
-            'foto_sampul' => $fileName,
-        ]);
+    // Simpan data ke database
+    Movie::create($validated);
 
         return redirect('/')->with('success', 'Data berhasil disimpan');
     }
